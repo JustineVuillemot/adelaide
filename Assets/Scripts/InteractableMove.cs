@@ -34,7 +34,8 @@ public class InteractableMove : Interactable
 
         // SOUND
         // Here sound for the cussion moving on the chair
-        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SD/SD_Pillow");
+
         if (collider != null)
         {
             collider.enabled = false;

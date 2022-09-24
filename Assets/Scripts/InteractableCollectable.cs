@@ -25,5 +25,6 @@ public class InteractableCollectable : Interactable
 
         // SOUND
         // Here is the sound for when an object is collected and placed in the inventory
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SD/SD_HarvestItem");
     }
 }
