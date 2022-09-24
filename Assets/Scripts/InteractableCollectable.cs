@@ -6,6 +6,7 @@ public class InteractableCollectable : Interactable
 {
     public Inventory inventory;
     public Sprite collectableInventoryVisual;
+    public Sprite collectableInventoryFocused;
 
     // Start is called before the first frame update
     protected override void Start()

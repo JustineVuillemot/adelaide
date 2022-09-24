@@ -9,14 +9,29 @@ public class Inventory : MonoBehaviour
     public InventoryCell[] InventoryCells;
     public Image dragImage;
 
+    public Vector3 openedPosition;
+    public Vector3 closedPosition;
+
     private List<InteractableCollectable> InventoryObjects = new List<InteractableCollectable>();
+    private RectTransform rectTransform; // Need rect transform for anchor position
 
     private int selectedObject = -1;
+    private bool isOpened = false;
 
     // Start is called before the first frame update
     void Start()
     {
         dragImage.gameObject.SetActive(false);
+
+        isOpened = false;
+
+        rectTransform = GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            rectTransform.anchoredPosition = closedPosition;
+        }
+
+        selectedObject = -1;
     }
 
     // Update is called once per frame
@@ -41,7 +56,7 @@ public class Inventory : MonoBehaviour
         selectedObject = index;
 
         // Hide image in inventory
-        InventoryCells[index].cellObject.enabled = false;
+        InventoryCells[index].cellObject.gameObject.SetActive(false);
 
         // Update drag image
         dragImage.sprite = InventoryObjects[selectedObject].collectableInventoryVisual;
@@ -76,7 +91,7 @@ public class Inventory : MonoBehaviour
         }
 
         // Display image in inventory
-        InventoryCells[selectedObject].cellObject.enabled = true;
+        InventoryCells[selectedObject].cellObject.gameObject.SetActive(true);
         selectedObject = -1;
     }
 
@@ -89,6 +104,8 @@ public class Inventory : MonoBehaviour
         }
 
         InventoryCells[index].cellObject.sprite = InventoryObjects[index].collectableInventoryVisual;
+        InventoryCells[index].cellObject.gameObject.SetActive(true);
+        InventoryCells[index].focusedSprite.sprite = InventoryObjects[index].collectableInventoryFocused;
     }
 
     private void RemoveFromInventory(int index)
@@ -99,5 +116,25 @@ public class Inventory : MonoBehaviour
         {
             UpdateCellVisual(i);
         }
+    }
+
+    public void ToggleInventory()
+    {
+        if (rectTransform == null)
+        {
+            // can't toggle if rect transform is null
+            return;
+        }
+
+        if (isOpened)
+        {
+            rectTransform.anchoredPosition = closedPosition;
+        }
+        else
+        {
+            rectTransform.anchoredPosition = openedPosition;
+        }
+
+        isOpened = !isOpened;
     }
 }
