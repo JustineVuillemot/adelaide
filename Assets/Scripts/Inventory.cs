@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
         selectedObject = index;
 
         // Hide image in inventory
-        InventoryCells[index].cellObject.gameObject.SetActive(false);
+        InventoryCells[index].cellObject.enabled = false;
 
         // Update drag image
         dragImage.sprite = InventoryObjects[selectedObject].sprite;
@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
         dragImage.gameObject.SetActive(false);
 
         // Hide image in inventory
-        InventoryCells[selectedObject].cellObject.gameObject.SetActive(true);
+        InventoryCells[selectedObject].cellObject.enabled = true;
 
         selectedObject = -1;
     }
