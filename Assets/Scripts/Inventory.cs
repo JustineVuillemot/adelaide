@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public InteractableLocked[] lockedObjects;
     public InventoryCell[] InventoryCells;
     public Image dragImage;
 
-    private List<SpriteRenderer> InventoryObjects = new List<SpriteRenderer>();
+    private List<InteractableCollectable> InventoryObjects = new List<InteractableCollectable>();
 
     private int selectedObject = -1;
 
@@ -23,7 +24,7 @@ public class Inventory : MonoBehaviour
     {
     }
 
-    public void AddObjectToInventory(SpriteRenderer toAdd)
+    public void AddObjectToInventory(InteractableCollectable toAdd)
     {
         InventoryObjects.Add(toAdd);
         UpdateCellVisual(InventoryObjects.Count - 1);
@@ -43,8 +44,7 @@ public class Inventory : MonoBehaviour
         InventoryCells[index].cellObject.enabled = false;
 
         // Update drag image
-        dragImage.sprite = InventoryObjects[selectedObject].sprite;
-        dragImage.color = InventoryObjects[selectedObject].color; // To comment when real sprite are intagrated
+        dragImage.sprite = InventoryObjects[selectedObject].collectableInventoryVisual;
         dragImage.gameObject.SetActive(true);
     }
 
@@ -58,9 +58,25 @@ public class Inventory : MonoBehaviour
 
         dragImage.gameObject.SetActive(false);
 
-        // Hide image in inventory
-        InventoryCells[selectedObject].cellObject.enabled = true;
+        foreach (InteractableLocked locked in lockedObjects)
+        {
+            // not focusing this locked object moving to next one in array
+            if (!locked.focusedSprite.activeSelf)
+            {
+                continue;
+            }
 
+            if (locked.unlockingCollectable == InventoryObjects[selectedObject])
+            {
+                locked.Unlock();
+                RemoveFromInventory(selectedObject);
+                selectedObject = -1;
+                return;
+            }
+        }
+
+        // Display image in inventory
+        InventoryCells[selectedObject].cellObject.enabled = true;
         selectedObject = -1;
     }
 
@@ -72,7 +88,16 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        InventoryCells[index].cellObject.sprite = InventoryObjects[index].sprite;
-        InventoryCells[index].cellObject.color = InventoryObjects[index].color; // To comment when real sprite are intagrated
+        InventoryCells[index].cellObject.sprite = InventoryObjects[index].collectableInventoryVisual;
+    }
+
+    private void RemoveFromInventory(int index)
+    {
+        InventoryObjects.RemoveAt(index);
+
+        for(int i = 0; i < InventoryObjects.Count; ++i)
+        {
+            UpdateCellVisual(i);
+        }
     }
 }
