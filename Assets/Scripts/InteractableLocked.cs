@@ -22,8 +22,9 @@ public class InteractableLocked : Interactable
     protected override void OnMouseDown()
     {
         //Debug.Log("Mouse just clicked : " + gameObject.name);
-        
+
         // SOUND
         // Here play sound that says the object is locked (can't be interacted with)
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SD/SD_Locked");
     }
 }
