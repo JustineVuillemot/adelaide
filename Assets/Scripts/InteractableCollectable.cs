@@ -5,21 +5,12 @@ using UnityEngine;
 public class InteractableCollectable : Interactable
 {
     public Inventory inventory;
-
-    private SpriteRenderer collectableVisual;
+    public Sprite collectableInventoryVisual;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-
-        collectableVisual = GetComponent<SpriteRenderer>();
-
-        if (collectableVisual == null)
-        {
-            Debug.LogError("Collectable must have a sprite attached to the same game object.");
-            gameObject.SetActive(false);
-        }
     }
 
     // Update is called once per frame
@@ -29,7 +20,10 @@ public class InteractableCollectable : Interactable
 
     protected override void OnMouseDown()
     {
-        inventory.AddObjectToInventory(collectableVisual);
+        inventory.AddObjectToInventory(this);
         gameObject.SetActive(false);
+
+        // SOUND
+        // Here is the sound for when an object is collected and placed in the inventory
     }
 }

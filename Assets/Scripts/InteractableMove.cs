@@ -31,6 +31,9 @@ public class InteractableMove : Interactable
         //Debug.Log("Mouse just clicked : " + gameObject.name);
         baseSprite.SetActive(false);
         clickedSprite.SetActive(true);
+
+        // SOUND
+        // Here sound for the cussion moving on the chair
         
         if (collider != null)
         {
