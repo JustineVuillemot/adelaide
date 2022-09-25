@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class InteractableDoor : Interactable
 {
@@ -21,6 +22,12 @@ public class InteractableDoor : Interactable
 
     protected override void OnMouseDown()
     {
+        // pointer is over UI we don't want to interact with scene objects then
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         if (inventory.HasCollectableInInventory(neededToWin))
         {
             SceneManager.LoadScene("EndWin");

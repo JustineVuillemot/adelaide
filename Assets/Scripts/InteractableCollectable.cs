@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InteractableCollectable : Interactable
 {
@@ -21,6 +22,12 @@ public class InteractableCollectable : Interactable
 
     protected override void OnMouseDown()
     {
+        // pointer is over UI we don't want to interact with scene objects then
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         inventory.AddObjectToInventory(this);
         gameObject.SetActive(false);
 
