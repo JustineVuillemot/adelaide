@@ -12,6 +12,8 @@ public class InteractableDoor : Interactable
     protected override void Start()
     {
         base.Start();
+        MusicSystem.M_Defeat.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        MusicSystem.M_Victory.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
     // Update is called once per frame
@@ -21,13 +23,19 @@ public class InteractableDoor : Interactable
 
     protected override void OnMouseDown()
     {
+
+        MusicSystem.M_Phase1.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         if (inventory.HasCollectableInInventory(neededToWin))
         {
             SceneManager.LoadScene("EndWin");
+            MusicSystem.M_Victory.start();
         }
+
         else
         {
             SceneManager.LoadScene("EndLoose");
+            MusicSystem.M_Defeat.start();
         }
     }
 }
