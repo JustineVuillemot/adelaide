@@ -43,6 +43,11 @@ public class Inventory : MonoBehaviour
     {
         InventoryObjects.Add(toAdd);
         UpdateCellVisual(InventoryObjects.Count - 1);
+
+        if (!isOpened)
+        {
+            ToggleInventory();
+        }
     }
 
     public void SelectObject(int index)
@@ -61,6 +66,8 @@ public class Inventory : MonoBehaviour
         // Update drag image
         dragImage.sprite = InventoryObjects[selectedObject].collectableInventoryVisual;
         dragImage.gameObject.SetActive(true);
+
+        ToggleInventory();
     }
 
     public void UnselectCurrentObject()
@@ -93,6 +100,8 @@ public class Inventory : MonoBehaviour
         // Display image in inventory
         InventoryCells[selectedObject].cellObject.gameObject.SetActive(true);
         selectedObject = -1;
+
+        ToggleInventory();
     }
 
     private void UpdateCellVisual(int index)
@@ -138,5 +147,8 @@ public class Inventory : MonoBehaviour
         }
 
         isOpened = !isOpened;
+
+        // SOUND
+        // Here is the sound for the inventory opening or closing
     }
 }
