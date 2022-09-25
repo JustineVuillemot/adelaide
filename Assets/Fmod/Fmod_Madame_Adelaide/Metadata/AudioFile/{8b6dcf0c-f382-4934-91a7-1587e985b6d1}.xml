@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{0eb97d64-d636-44f0-ab0e-a8f3ada8139c}">
+	<object class="AudioFile" id="{8b6dcf0c-f382-4934-91a7-1587e985b6d1}">
 		<property name="assetPath">
-			<value>SD_CloseInv.wav</value>
+			<value>M_DefeatLoop.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.27260770975056692</value>
+			<value>5.333333333333333</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{1783bb7d-ea0b-49fb-848e-7957f8b0f32c}</destination>
