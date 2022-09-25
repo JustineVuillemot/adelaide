@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f720f396-2e2b-45b3-ba61-be8148689d9d}">
+		<property name="assetPath">
+			<value>M_Victory.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.333333333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1783bb7d-ea0b-49fb-848e-7957f8b0f32c}</destination>
+		</relationship>
+	</object>
+</objects>

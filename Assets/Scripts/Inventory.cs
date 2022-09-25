@@ -129,10 +129,12 @@ public class Inventory : MonoBehaviour
         if (isOpened)
         {
             rectTransform.anchoredPosition = closedPosition;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SD/SD_CloseInv");
         }
         else
         {
             rectTransform.anchoredPosition = openedPosition;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SD/SD_OpenInv");
         }
 
         isOpened = !isOpened;
