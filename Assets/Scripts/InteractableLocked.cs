@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InteractableLocked : Interactable
 {
@@ -45,6 +46,12 @@ public class InteractableLocked : Interactable
     }
     protected override void OnMouseDown()
     {
+        // pointer is over UI we don't want to interact with scene objects then
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         //Debug.Log("Mouse just clicked : " + gameObject.name);
 
         // SOUND

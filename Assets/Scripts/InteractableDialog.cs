@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InteractableDialog : Interactable
 {
     public Inventory inventory;
     public InteractableCollectable toGiveInInventory;
+    public GameObject dialogToDisplay;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -20,9 +22,14 @@ public class InteractableDialog : Interactable
 
     protected override void OnMouseDown()
     {
-        gameObject.SetActive(false);
+        // pointer is over UI we don't want to interact with scene objects then
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
 
-        // Launch dialog
+        gameObject.SetActive(false);
+        dialogToDisplay.SetActive(true);
 
         inventory.AddObjectToInventory(toGiveInInventory);
 
