@@ -35,6 +35,7 @@ public class InteractableLocked : Interactable
 
         // SOUND
         // Here sound for unlocking the object (opening the cupboard) 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SD/SD_Unlock");
 
 
         if (collider != null)
