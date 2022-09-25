@@ -127,6 +127,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool HasCollectableInInventory(InteractableCollectable collectable)
+    {
+        foreach (InteractableCollectable collectableItem in InventoryObjects)
+        {
+            if (collectableItem == collectable)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void ToggleInventory()
     {
         if (rectTransform == null)
